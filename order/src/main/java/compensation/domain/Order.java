@@ -47,18 +47,16 @@ private String address;
 
     @PostPersist
     public void onPostPersist(){
-    Inventory inventory = OrderApplication.applicationContext
-        .getBean(compensation.external.InventoryService.class)
-        .checkStock(get??);
+    // Inventory inventory = OrderApplication.applicationContext
+    //     .getBean(compensation.external.InventoryService.class)
+    //     .checkStock(get??);
 
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
 
-
-
-        OrderCancelled orderCancelled = new OrderCancelled(this);
-        orderCancelled.publishAfterCommit();
+        // OrderCancelled orderCancelled = new OrderCancelled(this);
+        // orderCancelled.publishAfterCommit();
 
     
     }
@@ -82,19 +80,13 @@ private String address;
 
         */
 
-        /** Example 2:  finding and process
-        
-
-        repository().findById(outOfStock.get???()).ifPresent(order->{
+        /** Example 2:  finding and process*/
+        repository().findById(outOfStock.getOrderId()).ifPresent(order ->{
             
-            order // do something
+            order.setStatus("OrderCancelled");
             repository().save(order);
+        });
 
-
-         });
-        */
-
-        
     }
 //>>> Clean Arch / Port Method
 
